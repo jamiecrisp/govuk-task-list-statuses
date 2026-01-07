@@ -1,0 +1,50 @@
+{% extends "layouts/main.html" %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds-from-desktop">
+
+    <h1 class="govuk-heading-xl">Check your answers: Task 2</h1>
+
+    <h2 class="govuk-heading-m">Task 2 answers</h2>
+
+    <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Question 1
+        </dt>
+        <dd class="govuk-summary-list__value">
+          Example answer
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="/task-2">
+            Change<span class="govuk-visually-hidden"> question 1</span>
+          </a>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Question 2
+        </dt>
+        <dd class="govuk-summary-list__value">
+          No
+        </dd>
+        <dd class="govuk-summary-list__actions">
+          <a class="govuk-link" href="/task-2-question-2">
+            Change<span class="govuk-visually-hidden"> question 2</span>
+          </a>
+        </dd>
+      </div>
+    </dl>
+
+    <form action="/task-list" method="post">
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Save and continue
+      </button>
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

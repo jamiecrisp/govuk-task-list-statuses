@@ -1,0 +1,52 @@
+{% extends "layouts/main.html" %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <form action="/task-5-question-2" method="post">
+
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              Task 5 - Question 1
+            </h1>
+          </legend>
+          <div id="task-hint" class="govuk-hint">
+            This is the first question in Task 5
+          </div>
+          <div class="govuk-radios" data-module="govuk-radios">
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="hours" name="hours" type="radio" value="option-1">
+              <label class="govuk-label govuk-radios__label" for="hours">
+                Option 1
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="hours-2" name="hours" type="radio" value="option-2">
+              <label class="govuk-label govuk-radios__label" for="hours-2">
+                Option 2
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="hours-3" name="hours" type="radio" value="option-3">
+              <label class="govuk-label govuk-radios__label" for="hours-3">
+                Option 3
+              </label>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Continue
+      </button>
+
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

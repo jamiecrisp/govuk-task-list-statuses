@@ -1,0 +1,47 @@
+{% extends "layouts/main.html" %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <form action="/check-answers-insurance-details" method="post">
+
+      <h1 class="govuk-heading-l">Task 8 - Question 2</h1>
+
+      <p class="govuk-body">This is the second question in Task 8</p>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="provider-name">
+          Field 1
+        </label>
+        <input class="govuk-input govuk-!-width-two-thirds" id="provider-name" name="provider-name" type="text">
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="policy-number">
+          Field 2
+        </label>
+        <input class="govuk-input govuk-!-width-two-thirds" id="policy-number" name="policy-number" type="text">
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="coverage-amount">
+          Field 3
+        </label>
+        <div class="govuk-input__wrapper">
+          <div class="govuk-input__prefix" aria-hidden="true">£</div>
+          <input class="govuk-input govuk-input--width-10" id="coverage-amount" name="coverage-amount" type="text" spellcheck="false">
+        </div>
+      </div>
+
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Continue
+      </button>
+
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

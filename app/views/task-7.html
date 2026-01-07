@@ -1,0 +1,37 @@
+{% extends "layouts/main.html" %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <form action="/task-7-question-2" method="post">
+
+      <h1 class="govuk-heading-l">Task 7 - Question 1</h1>
+
+      <p class="govuk-body">This is the first question in Task 7</p>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="responsible-name">
+          Field 1
+        </label>
+        <input class="govuk-input govuk-!-width-two-thirds" id="responsible-name" name="responsible-name" type="text">
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="job-title">
+          Field 2
+        </label>
+        <input class="govuk-input govuk-!-width-two-thirds" id="job-title" name="job-title" type="text">
+      </div>
+
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Continue
+      </button>
+
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

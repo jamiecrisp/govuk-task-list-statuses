@@ -1,0 +1,31 @@
+{% extends "layouts/main.html" %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <form action="/task-3-question-2" method="post">
+
+      <div class="govuk-form-group">
+        <h1 class="govuk-label-wrapper">
+          <label class="govuk-label govuk-label--l" for="activities">
+            Task 3 - Question 1
+          </label>
+        </h1>
+        <div id="activities-hint" class="govuk-hint">
+          This is the first question in Task 3
+        </div>
+        <textarea class="govuk-textarea" id="activities" name="activities" rows="5" aria-describedby="activities-hint"></textarea>
+      </div>
+
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Continue
+      </button>
+
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

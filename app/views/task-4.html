@@ -1,0 +1,51 @@
+{% extends "layouts/main.html" %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    <form action="/task-4-question-2" method="post">
+
+      <h1 class="govuk-heading-l">Task 4 - Question 1</h1>
+
+      <p class="govuk-body">This is the first question in Task 4</p>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="address-line-1">
+          Field 1
+        </label>
+        <input class="govuk-input" id="address-line-1" name="address-line-1" type="text">
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="address-line-2">
+          Field 2 (optional)
+        </label>
+        <input class="govuk-input" id="address-line-2" name="address-line-2" type="text">
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="address-town">
+          Field 3
+        </label>
+        <input class="govuk-input govuk-!-width-two-thirds" id="address-town" name="address-town" type="text">
+      </div>
+
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="address-postcode">
+          Field 4
+        </label>
+        <input class="govuk-input govuk-input--width-10" id="address-postcode" name="address-postcode" type="text">
+      </div>
+
+      <button type="submit" class="govuk-button" data-module="govuk-button">
+        Continue
+      </button>
+
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}
