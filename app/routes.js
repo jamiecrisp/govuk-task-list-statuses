@@ -18,47 +18,49 @@ const router = govukPrototypeKit.requests.setupRouter()
 const TASKS = [
   {
     key: 'task-1',
-    firstQuestionRoute: '/task-1',
+    secondQuestionRoute: '/task-1-question-2',
     checkAnswersRoute: '/check-answers-task-1'
   },
   {
     key: 'task-2',
-    firstQuestionRoute: '/task-2',
+    secondQuestionRoute: '/task-2-question-2',
     checkAnswersRoute: '/check-answers-task-2'
   },
   {
     key: 'task-3',
-    firstQuestionRoute: '/task-3',
+    secondQuestionRoute: '/task-3-question-2',
     checkAnswersRoute: '/check-answers-task-3'
   },
   {
     key: 'task-4',
-    firstQuestionRoute: '/task-4',
-    checkAnswersRoute: '/check-answers-task-4'
+    secondQuestionRoute: '/task-4-question-2',
+    checkAnswersRoute: '/check-answers-task-4',
+    dependsOn: 'task-3'
   },
   {
     key: 'task-5',
-    firstQuestionRoute: '/task-5',
+    secondQuestionRoute: '/task-5-question-2',
     checkAnswersRoute: '/check-answers-task-5'
   },
   {
     key: 'task-6',
-    firstQuestionRoute: '/task-6',
+    secondQuestionRoute: '/task-6-question-2',
     checkAnswersRoute: '/check-answers-task-6'
   },
   {
     key: 'task-7',
-    firstQuestionRoute: '/task-7',
-    checkAnswersRoute: '/check-answers-task-7'
+    secondQuestionRoute: '/task-7-question-2',
+    checkAnswersRoute: '/check-answers-task-7',
+    dependsOn: 'task-5'
   },
   {
     key: 'task-8',
-    firstQuestionRoute: '/task-8',
+    secondQuestionRoute: '/task-8-question-2',
     checkAnswersRoute: '/check-answers-task-8'
   },
   {
     key: 'task-9',
-    firstQuestionRoute: '/task-9',
+    secondQuestionRoute: '/task-9-question-2',
     checkAnswersRoute: '/check-answers-task-9'
   }
 ]
@@ -70,6 +72,17 @@ const TASKS = [
 // Function to get task status
 function getTaskStatus(req, taskKey) {
   const session = req.session.data || {}
+
+  // Find the task configuration
+  const task = TASKS.find(t => t.key === taskKey)
+
+  // Check if task has dependencies that aren't met yet
+  if (task && task.dependsOn) {
+    const dependencyMet = session.completedTasks && session.completedTasks.includes(task.dependsOn)
+    if (!dependencyMet) {
+      return 'cannot-start-yet'
+    }
+  }
 
   // Check if task is completed
   if (session.completedTasks && session.completedTasks.includes(taskKey)) {
@@ -133,10 +146,10 @@ router.get('/task-list', function (req, res) {
 
 // Automatically generate routes for all tasks
 TASKS.forEach(task => {
-  // GET route for first question - marks task as started
-  router.get(task.firstQuestionRoute, function (req, res) {
+  // POST route from first question to second question - marks task as started
+  router.post(task.secondQuestionRoute, function (req, res) {
     markTaskAsStarted(req, task.key)
-    res.render(task.firstQuestionRoute.substring(1)) // Remove leading slash
+    res.render(task.secondQuestionRoute.substring(1)) // Remove leading slash
   })
 
   // POST route for check answers - marks task as completed

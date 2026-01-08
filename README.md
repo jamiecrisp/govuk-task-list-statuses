@@ -51,9 +51,9 @@ Follow these 3 simple steps:
 
 Create your question pages and check answers page in `app/views/`:
 
-- `my-new-task.html` - First question page
-- `my-new-task-question-2.html` - Additional questions (optional)
-- `check-answers-my-new-task.html` - Check answers page
+- `task-10.html` - First question page
+- `task-10-question-2.html` - Additional questions (optional)
+- `check-answers-task-10.html` - Check answers page
 
 ### Step 2: Update the Task List UI
 
@@ -62,12 +62,12 @@ Edit `app/views/task-list.html` and add your task to the appropriate section:
 ```html
 <li class="govuk-task-list__item govuk-task-list__item--with-link">
   <div class="govuk-task-list__name-and-hint">
-    <a class="govuk-link govuk-task-list__link" href="/my-new-task" aria-describedby="my-new-task-status">
-      My New Task Name
+    <a class="govuk-link govuk-task-list__link" href="/task-10" aria-describedby="task-10-status">
+      Task 10
     </a>
   </div>
-  <div class="govuk-task-list__status" id="my-new-task-status">
-    {{ taskStatus(taskStatuses['my-new-task']) }}
+  <div class="govuk-task-list__status" id="task-10-status">
+    {{ taskStatus(taskStatuses['task-10']) }}
   </div>
 </li>
 ```
@@ -80,9 +80,9 @@ Edit `app/routes.js` and add your task to the `TASKS` array:
 const TASKS = [
   // ... existing tasks
   {
-    key: 'my-new-task',
-    firstQuestionRoute: '/my-new-task',
-    checkAnswersRoute: '/check-answers-my-new-task'
+    key: 'task-10',
+    firstQuestionRoute: '/task-10',
+    checkAnswersRoute: '/check-answers-task-10'
   }
 ]
 ```
@@ -95,9 +95,9 @@ Each task in the `TASKS` array requires:
 
 | Property | Description | Example |
 |----------|-------------|---------|
-| `key` | Unique identifier (used for status tracking) | `'my-new-task'` |
-| `firstQuestionRoute` | URL of the first question page | `'/my-new-task'` |
-| `checkAnswersRoute` | URL of the check answers page | `'/check-answers-my-new-task'` |
+| `key` | Unique identifier (used for status tracking) | `'task-10'` |
+| `firstQuestionRoute` | URL of the first question page | `'/task-10'` |
+| `checkAnswersRoute` | URL of the check answers page | `'/check-answers-task-10'` |
 
 ## Question Page Flow
 
@@ -174,8 +174,9 @@ To clear session data and reset all task statuses:
 
 ## Tips
 
-- Keep task keys consistent (use lowercase with hyphens)
-- Name check answers pages as `check-answers-[task-key].html`
+- Keep task keys consistent (use `task-N` format where N is the task number)
+- Name check answers pages as `check-answers-task-N.html`
+- Name additional question pages as `task-N-question-2.html`, `task-N-question-3.html`, etc.
 - Use the same task key in the TASKS array and task-list.html
 - The first question route must match the href in task-list.html
 
