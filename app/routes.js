@@ -56,7 +56,8 @@ const TASKS = [
   {
     key: 'task-8',
     secondQuestionRoute: '/task-8-question-2',
-    checkAnswersRoute: '/check-answers-task-8'
+    checkAnswersRoute: '/check-answers-task-8',
+    dependsOn: ['task-6', 'task-7']
   },
   {
     key: 'task-9',
@@ -78,8 +79,12 @@ function getTaskStatus(req, taskKey) {
 
   // Check if task has dependencies that aren't met yet
   if (task && task.dependsOn) {
-    const dependencyMet = session.completedTasks && session.completedTasks.includes(task.dependsOn)
-    if (!dependencyMet) {
+    // Handle both single dependency (string) and multiple dependencies (array)
+    const dependencies = Array.isArray(task.dependsOn) ? task.dependsOn : [task.dependsOn]
+    const allDependenciesMet = dependencies.every(dep =>
+      session.completedTasks && session.completedTasks.includes(dep)
+    )
+    if (!allDependenciesMet) {
       return 'cannot-start-yet'
     }
   }
