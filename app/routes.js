@@ -61,8 +61,8 @@ const TASKS = [
   },
   {
     key: 'task-9',
-    secondQuestionRoute: '/task-9-question-2',
     checkAnswersRoute: '/check-answers-task-9'
+    // Note: No secondQuestionRoute - this is a single question task
   }
 ]
 
@@ -118,6 +118,21 @@ function markTaskAsCompleted(req, taskKey) {
   }
 }
 
+// Function to mark task as in progress (removes from completed, keeps as started)
+function markTaskAsInProgress(req, taskKey) {
+  req.session.data = req.session.data || {}
+  req.session.data.completedTasks = req.session.data.completedTasks || []
+
+  // Remove from completed tasks if present
+  const index = req.session.data.completedTasks.indexOf(taskKey)
+  if (index > -1) {
+    req.session.data.completedTasks.splice(index, 1)
+  }
+
+  // Ensure task is marked as started
+  req.session.data[taskKey + '_started'] = true
+}
+
 // Function to get all task statuses
 function getAllTaskStatuses(req) {
   const statuses = {}
@@ -151,11 +166,21 @@ router.get('/task-list', function (req, res) {
 
 // Automatically generate routes for all tasks
 TASKS.forEach(task => {
-  // POST route from first question to second question - marks task as started
-  router.post(task.secondQuestionRoute, function (req, res) {
-    markTaskAsStarted(req, task.key)
-    res.render(task.secondQuestionRoute.substring(1)) // Remove leading slash
-  })
+  if (task.secondQuestionRoute) {
+    // Task has 2 questions
+    // POST route from first question to second question
+    // If task was completed, mark as in-progress (answer changed)
+    // Otherwise just mark as started
+    router.post(task.secondQuestionRoute, function (req, res) {
+      const currentStatus = getTaskStatus(req, task.key)
+      if (currentStatus === 'completed') {
+        markTaskAsInProgress(req, task.key)
+      } else {
+        markTaskAsStarted(req, task.key)
+      }
+      res.render(task.secondQuestionRoute.substring(1)) // Remove leading slash
+    })
+  }
 
   // POST route for check answers - marks task as completed
   router.post(task.checkAnswersRoute, function (req, res) {
